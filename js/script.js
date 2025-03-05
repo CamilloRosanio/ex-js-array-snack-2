@@ -62,15 +62,43 @@ function somma(a, b) {
 const longBooks = books.filter(book => {
     return book.pages > 300;
 })
-console.log('Libri con 300+ pagine:', longBooks);
+// console.log('Libri con 300+ pagine:', longBooks);
 
 const longBooksTitles = longBooks.map(book => book.title);
-console.log('Titoli dei libri con 300+ pagine:', longBooksTitles);
+// console.log('Titoli dei libri con 300+ pagine:', longBooksTitles);
 
-longBooksTitles.forEach(title => console.log('Stampa ciclica di ogni singolo titolo:', title));
+// longBooksTitles.forEach(title => console.log('Stampa ciclica di ogni singolo titolo:', title));
 
 
 
 /***********************************************************************
 # SNACK 2
 ***********************************************************************/
+
+const availableBooks = books.filter(book => {
+    return book.available === true;
+})
+console.log('Libri disponibili:', availableBooks);
+
+// VERSIONE INIZIALE
+// const discountedBooks = availableBooks.map(book => {
+//     const priceArray = book.price.split('');
+//     const cifre = priceArray.filter(char => !isNaN(char));
+//     const prezzo = Number(cifre.join(''));
+//     const prezzoScontato = (prezzo * 0.8).toFixed(2);
+//     const prezzoEuro = prezzoScontato + '€';
+//     return { ...book, price: prezzoEuro }
+// });
+
+// VERSIONE COMPATTA
+const discountedBooks = availableBooks.map(book => ({
+    ...book,
+    price: (Number(book.price.replace('€', '').trim()) * 0.8).toFixed(2) + '€'
+}));
+
+
+console.log('Libri disponibili scontati del 20%:', discountedBooks);
+
+const fullPricedBook = discountedBooks.find(book => Number(book.price.replace('€', '').trim()) % 1 === 0);
+
+console.log('Primo libro disponibile con prezzo intero:', fullPricedBook);

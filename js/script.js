@@ -78,7 +78,7 @@ const longBooksTitles = longBooks.map(book => book.title);
 const availableBooks = books.filter(book => {
     return book.available === true;
 })
-console.log('Libri disponibili:', availableBooks);
+// console.log('Libri disponibili:', availableBooks);
 
 // VERSIONE INIZIALE
 // const discountedBooks = availableBooks.map(book => {
@@ -97,8 +97,44 @@ const discountedBooks = availableBooks.map(book => ({
 }));
 
 
-console.log('Libri disponibili scontati del 20%:', discountedBooks);
+// console.log('Libri disponibili scontati del 20%:', discountedBooks);
 
 const fullPricedBook = discountedBooks.find(book => Number(book.price.replace('€', '').trim()) % 1 === 0);
 
-console.log('Primo libro disponibile con prezzo intero:', fullPricedBook);
+// console.log('Primo libro disponibile con prezzo intero:', fullPricedBook);
+
+
+
+/***********************************************************************
+# SNACK 3
+***********************************************************************/
+
+const authors = books.map(book => book.author);
+console.log('Autori:', authors);
+
+const areAuthorsAdults = authors.every(a => a.age > 18);
+console.log('Gli autori sono tutti maggiorenni?', areAuthorsAdults);
+
+authors.sort((a, b) => b.age - a.age);
+console.log('Autori ordinati per età:', authors);
+
+
+
+/***********************************************************************
+# SNACK 4
+***********************************************************************/
+
+const ages = authors.map(a => a.age);
+console.log('Età:', ages);
+
+const agesSum = ages.reduce((acc, age) => acc + age, 0);
+console.log('Somma delle età degli autori:', agesSum);
+
+const etàMedia = agesSum / ages.length;
+console.log('Età media degli autori:', etàMedia);
+
+
+
+/***********************************************************************
+# SNACK 5
+***********************************************************************/

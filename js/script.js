@@ -110,13 +110,13 @@ const fullPricedBook = discountedBooks.find(book => Number(book.price.replace('�
 ***********************************************************************/
 
 const authors = books.map(book => book.author);
-console.log('Autori:', authors);
+// console.log('Autori:', authors);
 
 const areAuthorsAdults = authors.every(a => a.age > 18);
-console.log('Gli autori sono tutti maggiorenni?', areAuthorsAdults);
+// console.log('Gli autori sono tutti maggiorenni?', areAuthorsAdults);
 
 authors.sort((a, b) => b.age - a.age);
-console.log('Autori ordinati per età:', authors);
+// console.log('Autori ordinati per età:', authors);
 
 
 
@@ -125,16 +125,54 @@ console.log('Autori ordinati per età:', authors);
 ***********************************************************************/
 
 const ages = authors.map(a => a.age);
-console.log('Età:', ages);
+// console.log('Età:', ages);
 
 const agesSum = ages.reduce((acc, age) => acc + age, 0);
-console.log('Somma delle età degli autori:', agesSum);
+// console.log('Somma delle età degli autori:', agesSum);
 
 const etàMedia = agesSum / ages.length;
-console.log('Età media degli autori:', etàMedia);
+// console.log('Età media degli autori:', etàMedia);
 
 
 
 /***********************************************************************
-# SNACK 5
+# SNACK 5 (bonus)
 ***********************************************************************/
+
+
+
+/***********************************************************************
+# SNACK 6 (bonus)
+***********************************************************************/
+
+const areThereAvailableBooks = books.some(b => b.available === true);
+console.log('Esiste almeno un libro disponibile?', areThereAvailableBooks);
+
+const booksByPrice = books.sort((a, b) => {
+    const priceA = Number(a.price.replace('€', '').trim());
+    const priceB = Number(b.price.replace('€', '').trim());
+
+    return priceA - priceB;
+});
+
+console.log('Libri ordinati per prezzo crescente:', booksByPrice.map(b => b.price));
+
+const booksByPriceAndAvailability = booksByPrice.sort((a, b) => b.available - a.available);
+console.log('Libri ordinati in base a prezzo e poi disponibilità:', booksByPriceAndAvailability);
+
+
+
+/***********************************************************************
+# SNACK 7 (bonus)
+***********************************************************************/
+
+const tagCounts = books.reduce((acc, book) => {
+    book.tags.forEach(tag => {
+        // acc[tag] accede alla KEY del nostro OBJECT che si chiama come il Tag
+        acc[tag] = (acc[tag] || 0) + 1;
+    });
+    return acc;
+}, {});
+
+console.log('Conteggio di utilizzi per Tag:', tagCounts);
+

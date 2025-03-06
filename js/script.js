@@ -139,6 +139,17 @@ const etàMedia = agesSum / ages.length;
 # SNACK 5 (bonus)
 ***********************************************************************/
 
+const ids = [2, 13, 7, 21, 19];
+
+async function getBooks(ids) {
+    const baseUrl = 'https://boolean-spec-frontend.vercel.app/freetestapi/books/';
+    const bookPromises = ids.map(id => fetch(baseUrl + id).then(response => response.json()));
+    const apiBooks = await Promise.all(bookPromises);
+    return apiBooks;
+}
+
+getBooks(ids).then(books => console.log(books));
+
 
 
 /***********************************************************************
@@ -146,7 +157,7 @@ const etàMedia = agesSum / ages.length;
 ***********************************************************************/
 
 const areThereAvailableBooks = books.some(b => b.available === true);
-console.log('Esiste almeno un libro disponibile?', areThereAvailableBooks);
+// console.log('Esiste almeno un libro disponibile?', areThereAvailableBooks);
 
 const booksByPrice = books.sort((a, b) => {
     const priceA = Number(a.price.replace('€', '').trim());
@@ -155,10 +166,10 @@ const booksByPrice = books.sort((a, b) => {
     return priceA - priceB;
 });
 
-console.log('Libri ordinati per prezzo crescente:', booksByPrice.map(b => b.price));
+// console.log('Libri ordinati per prezzo crescente:', booksByPrice.map(b => b.price));
 
 const booksByPriceAndAvailability = booksByPrice.sort((a, b) => b.available - a.available);
-console.log('Libri ordinati in base a prezzo e poi disponibilità:', booksByPriceAndAvailability);
+// console.log('Libri ordinati in base a prezzo e poi disponibilità:', booksByPriceAndAvailability);
 
 
 
@@ -174,5 +185,9 @@ const tagCounts = books.reduce((acc, book) => {
     return acc;
 }, {});
 
-console.log('Conteggio di utilizzi per Tag:', tagCounts);
+// console.log('Conteggio di utilizzi per Tag:', tagCounts);
+
+
+
+
 

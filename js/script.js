@@ -156,10 +156,13 @@ getBooks(ids).then(books => console.log(books));
 # SNACK 6 (bonus)
 ***********************************************************************/
 
-const areThereAvailableBooks = books.some(b => b.available === true);
+const areThereAvailableBooks = books.some(b => b.available);
 // console.log('Esiste almeno un libro disponibile?', areThereAvailableBooks);
 
-const booksByPrice = books.sort((a, b) => {
+// Utilizzo l'operatore SPREAD così non riordino "books" ma solo la sua copia
+const booksByPrice = [...books].sort((a, b) => {
+
+    // ATTENZIONE: probabilmente era meglio parseFloat perchè trasforma in numero ma rimuove anche i caratteri non numerici
     const priceA = Number(a.price.replace('€', '').trim());
     const priceB = Number(b.price.replace('€', '').trim());
 
